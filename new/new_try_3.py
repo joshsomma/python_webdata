@@ -8,25 +8,17 @@ from BeautifulSoup import *
 url = raw_input('Enter - ')
 pos = raw_input('Position - ')
 count = raw_input('Count - ')
-links = []
-newLink = ''
+i = 0
 
 html = urllib.urlopen(url).read()
 soup = BeautifulSoup(html)
 tags = soup('a')
 
-##############
-# HEY REMEMBER YOU NEED TO OPEN THE NEW FILE WITH URLLIB AND READ THE CONTENTS TO GET THE NEXT URL!
-# DUHHHHH!
-##############
-
-# set up helper functions
-def retrieveUrl(startUrl):
-    global tags, newLink
-    newLink = tags[int(pos)].get('href')
-    return newLink
-
-for i in range(0, int(count)):
-    retrieveUrl(url)
-    links.append(newLink)
-    print "Retrieving URL: ", links
+while i < int(count):
+    print i
+    newLink = tags[int(pos) - 1].get('href')
+    print "Retrieving URL: ", tags[int(pos) - 1].get('href')
+    newHtml = urllib.urlopen(newLink).read()
+    soup = BeautifulSoup(newHtml)
+    tags = soup('a')
+    i = i + 1
