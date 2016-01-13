@@ -7,15 +7,29 @@ from BeautifulSoup import *
 
 url = raw_input('Enter - ')
 pos = raw_input('Position - ')
-# count = raw_input('Count - ')
+count = raw_input('Count - ')
+nextUrl = ""
+names = []
+i = 0
 
 html = urllib.urlopen(url).read()
 soup = BeautifulSoup(html)
 
 # set up helper functions
-def retrieveLine(getPos):
-    global soup
+def retrieveUrl(startUrl):
+    global soup, nextUrl
     tags = soup('a')
-    print "Retrieving:", tags[int(pos)].get('href')
+    nextUrl = tags[int(pos)].get('href')
+    print "Retrieving URL: ", nextUrl
+    return nextUrl
 
-retrieveLine(pos)
+#def retrieveLine(getPos):
+    #global soup, names
+    #tags = soup('a')
+    #print "Retrieving URL: ", tags[int(pos)].get('href')
+    #print "Retrieving Name: ", tags[int(pos)].string
+    #names.append(tags[int(pos)].string)
+
+retrieveUrl(url)
+print "break"
+retrieveUrl(nextUrl)
