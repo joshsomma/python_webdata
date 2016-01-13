@@ -15,7 +15,6 @@ soup = BeautifulSoup(html)
 tags = soup('a')
 
 while i < int(count):
-    print i
     newLink = tags[int(pos) - 1].get('href')
     print "Retrieving URL: ", tags[int(pos) - 1].get('href')
     newHtml = urllib.urlopen(newLink).read()
